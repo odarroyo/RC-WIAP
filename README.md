@@ -1,4 +1,4 @@
-# RC-WIAP: Reinforced Concrete Wall Interaction Analysis Program
+# RC-WIAP: Reinforced Concrete Wall Inelastic Analysis Program
 
 ## Overview
 
@@ -6,7 +6,7 @@ RC-WIAP is a comprehensive structural analysis platform for reinforced concrete 
 
 ## Features
 
-- **Model Generation** (`app.py`): Create parametric building models with multiple stories and shear walls
+- **Model Generation** (`app_modelcreator.py`): Create parametric building models with multiple stories and shear walls
 - **Pushover Analysis** (`app_analysis.py`): Perform nonlinear static pushover analysis using OpenSeesPy
 - **IDA & Dynamic Analysis** (`app_dynamic.py`): Incremental Dynamic Analysis with ground motion scaling
 - **Fragility Functions** (`app_dynamic.py`): Calculate and visualize seismic fragility curves
@@ -48,7 +48,7 @@ pip install -r requirements.txt
 
 ```
 RC-WIAP/
-├── app.py                      # Model generation interface
+├── app_modelcreator.py         # Model generation interface
 ├── app_analysis.py             # Pushover analysis and visualization
 ├── app_dynamic.py              # IDA analysis and fragility functions
 ├── 00_MODEL-CREATOR.py         # Master model template
@@ -84,7 +84,7 @@ RC-WIAP/
 
 ## Workflow
 
-### 1. Model Generation (`app.py`)
+### 1. Model Generation (`app_modelcreator.py`)
 
 The model generation interface allows you to create building models through three steps:
 
@@ -926,3 +926,4 @@ Special thanks to the structural engineering research community for developing t
 
 **Last Updated**: November 9, 2025
 **Version**: 3.0
+
