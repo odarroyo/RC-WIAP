@@ -510,13 +510,6 @@ Interactive Plotly visualization:
 - Median (P=0.5) occurs at θ
 - β controls curve spread
 
-#### Data Export
-
-**Download Button**:
-- CSV file with fragility curve data
-- Columns: Sa [g], P[ds1], P[ds2], P[ds3], P[ds4]
-- 200 Sa values from min to max
-- Suitable for further analysis or reporting
 
 ## Running Multiple Apps Simultaneously
 
@@ -654,7 +647,7 @@ Pandas DataFrame with IDA analysis results:
 The Multiple Vertical Line Element Model (MVLEM) is used for wall modeling:
 - **Fibers**: Vertical uniaxial elements representing wall segments
 - **Shear Spring**: Horizontal spring for shear behavior
-- **DOFs**: 6 DOF per node (3 translations + 3 rotations)
+- **DOFs**: 3 DOF per node (2 translations + 1 rotation)
 
 ### Material Models
 
@@ -664,7 +657,7 @@ The Multiple Vertical Line Element Model (MVLEM) is used for wall modeling:
 - Unconfined concrete for web regions
 
 **Steel**:
-- Bilinear or Giuffré-Menegotto-Pinto model
+- Hysteretic material
 - Different properties for RB vs WWM
 - Strain hardening included
 
@@ -749,68 +742,6 @@ The modular structure allows easy extension:
 - **Custom EDPs**: Modify result extraction in `01_PUSHOVER.py`
 - **Additional Visualizations**: Extend `app_analysis.py`
 
-## Best Practices
-
-### Model Generation
-
-1. **Start Simple**: Begin with 2-3 stories and few walls
-2. **Consistent Units**: Use kN, m, MPa throughout
-3. **Reasonable Parameters**: 
-   - Wall thickness: 0.10-0.30 m
-   - Story heights: 2.5-4.0 m
-   - fc: 21-35 MPa
-4. **Save Frequently**: Save each wall immediately after defining
-
-### Analysis Setup
-
-1. **Modal Pattern**: Use pushtype=3 for realistic load distribution
-2. **Appropriate Drift**: 
-   - Low-rise (1-3 stories): 0.025-0.035
-   - Mid-rise (4-8 stories): 0.030-0.040
-   - High-rise (9+ stories): 0.035-0.050
-3. **Increment Size**: Balance accuracy vs speed
-   - Quick analysis: Dincr = 0.002
-   - Normal: Dincr = 0.001
-   - Detailed: Dincr = 0.0005
-
-### Results Interpretation
-
-1. **Check Control Points**: Ensure they occur in logical sequence
-2. **Review Curves**: Look for smooth, monotonic behavior
-3. **Compare EDPs**: SDR typically governs for regular structures
-4. **Validate**: Compare V/W with hand calculations (V/W ≈ C_s)
-
-## Validation Examples
-
-### Example 1: 5-Story Building
-
-**Input**:
-- Stories: 5
-- Heights: 15, 12, 9, 6, 3 m (bottom to top)
-- w = 10 kN, ws = 35 kN
-- fc = 21 MPa
-- 2 walls: 0.15m × 3.0m each
-- Direction: Longitudinal
-
-**Expected Results**:
-- V/W at yielding: ~0.15-0.25
-- Maximum V/W: ~0.30-0.45
-- SDR at max: 0.5-1.5%
-
-### Example 2: 3-Story Building
-
-**Input**:
-- Stories: 3
-- Heights: 12, 9, 6 m
-- w = 15 kN, ws = 40 kN
-- fc = 28 MPa
-- 3 walls: 0.20m × 4.0m each
-
-**Expected Results**:
-- V/W at yielding: ~0.20-0.30
-- Maximum V/W: ~0.40-0.60
-- More ductile behavior (higher drift capacity)
-
 ## Troubleshooting
 
 ### Debug Mode
@@ -850,20 +781,12 @@ Check terminal output for:
    - Check curve monotonicity
    - Verify all walls appear in plots
 
-## References
-
-### Technical Background
-
-- MVLEM Element: Lu et al. (2015)
-- Pushover Analysis: FEMA 356, ATC-40
-- Material Models: Mander et al. (1988), Menegotto-Pinto (1973)
-- Damage States: Carrillo et al. (2022)
-
 ### Software Documentation
 
 - OpenSeesPy: https://openseespydoc.readthedocs.io
 - Streamlit: https://docs.streamlit.io
 - Plotly: https://plotly.com/python
+- opseestools: https://opseestools.readthedocs.io/en/latest/index.html
 
 ## Version History
 
@@ -914,9 +837,8 @@ RC-WIAP is developed for academic and research purposes.
 
 ## Authors
 
-- Orlando
-- Frank
-- JuanJo
+- Orlando Arroyo
+- Frank Vidales
 
 ## Acknowledgments
 
@@ -926,4 +848,5 @@ Special thanks to the structural engineering research community for developing t
 
 **Last Updated**: November 9, 2025
 **Version**: 3.0
+
 
